@@ -22,6 +22,12 @@ public class HeapSort extends BaseUtil {
         printArray(a);
     }
 
+    /**
+     * 堆调整 使一段堆中最小元素升至堆顶
+     * @param a
+     * @param p
+     * @param r
+     */
     public static void adjustHeap(int[] a, int p, int r) {
         int key = a[p];
         int child = 2 * p + 1;
@@ -39,12 +45,24 @@ public class HeapSort extends BaseUtil {
         a[p] = key;
     }
 
+    /**
+     * 初始化堆
+     * @param a
+     * @param p
+     * @param r
+     */
     public static void initHeap(int[] a, int p, int r) {
         for (int q = (r-1)/2 ; q >= 0; q--) {
             adjustHeap(a, q, r);
         }
     }
 
+    /**
+     * 使用最小堆实现排序
+     * @param a
+     * @param p
+     * @param r
+     */
     public static void minHeapSort(int[] a, int p, int r) {
         initHeap(a, p, r);
         for (int i = r; i > 0; i--) {
