@@ -7,9 +7,10 @@ package com.test.sort;
  * @CodeReviewer:
  */
 public class BaseUtil {
-    public void printArray(int[] a) {
+    public static void printArray(int[] a) {
         for (int i : a) {
             System.out.print(i + ",");
         }
+        System.out.println();
     }
 }

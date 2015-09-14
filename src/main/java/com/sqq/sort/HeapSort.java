@@ -17,7 +17,7 @@ public class HeapSort {
     public void testSort() {
         System.out.println(" 堆排序 初始数组为:          " + toString(a));
         makeMinHeap(a,a.length);
-        minHeapSort(a, a.length);
+//        minHeapSort(a, a.length);
         printArry(a);
 
     }
@@ -91,8 +91,8 @@ public class HeapSort {
      */
     public static void minHeapFixdown(int[] a, int i, int n) {
         int j, temp;
-        temp = a[i];
-        j = 2 * i + 1;
+        temp = a[i];    //key insert a[i+1..n]
+        j = 2 * i + 1;  //left child of key
         while (j < n) {
             //在子节点中找出最小值
             if (j + 1 < n && a[j + 1] < a[j]) {     //若下标没越界且左孩子大于右孩子
