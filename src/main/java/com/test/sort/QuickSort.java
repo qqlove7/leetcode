@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @Author: sunqianqian
  * @Date: 2015/9/13
- * @Description:
+ * @Description: 快速排序
  * @CodeReviewer:
  */
 public class QuickSort extends BaseUtil {
@@ -27,24 +27,31 @@ public class QuickSort extends BaseUtil {
         return a;
     }
 
+    /**
+     * 快速排序：分治法一：取一基准数，将数组中比它大的放到右边，小于等于它的放到左边。然后对左边和右边的数组重复这一过程。
+     *
+     * @param a 待排序数组
+     * @param p 数组开始下标
+     * @param r 数组结束下标
+     * @return
+     */
     public static int getQ(int[] a, int p, int r) {
-        int i = p, j = r;
-        int key = a[i];
-        while (i < j) {
-            while (i < j && a[j] > key) {
-                j--;
+        int key = a[p];
+        while (p < r) {
+            while (p < r && a[r] > key) {
+                r--;
             }
-            if (i < j) {
-                a[i] = a[j];
+            if (p < r) {
+                a[p] = a[r];
             }
-            while (i < j && a[i] < key) {
-                i++;
+            while (p < r && a[p] < key) {
+                p++;
             }
-            if (i < j) {
-                a[j] = a[i];
+            if (p < r) {
+                a[r] = a[p];
             }
         }
-        a[i] = key;
-        return i;
+        a[p] = key;
+        return p;
     }
 }
