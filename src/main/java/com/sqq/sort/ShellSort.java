@@ -9,12 +9,12 @@ import org.junit.Test;
  * 然后一次缩减增量再进行排序,直至增量足够小时对全体元素进行插入排序.
  */
 public class ShellSort {
-    public static int[] a = {3, 7, 5, 2, 10, 9, 4, 6};
+    static int[] a = {2, 8, 7, 1, 3, 5, 6, 4};
 
     @Test
     public void testSort() {
         System.out.println("  初始数组为:          " + toString(a));
-        printArry(shellSort3(a));
+        printArry(shellSort2(a));
     }
 
     public static String toString(int[] a) {
