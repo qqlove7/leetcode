@@ -14,7 +14,58 @@ public class ShellSort {
     @Test
     public void testSort() {
         System.out.println("  初始数组为:          " + toString(a));
-        printArry(shellSort2(a));
+        shellSort(a, 0, a.length - 1);
+        printArry(a);
+    }
+
+    public void shellSort(int[] a, int lo, int hi) {
+        int h = 1;
+        // 计算步长序列的最大值
+        while (h < (hi + 1) / 3) {
+            h = 3 * h + 1;
+        }
+        while (h >= 1) {
+            insertSort(a, lo, hi, h);
+            h = h / 3; // 缩小步长
+        }
+    }
+
+    /**
+     * 带步长的插入排序
+     * 待排序数组为 a[lo] ,a[lo+h],a[lo+2h]..
+     *
+     * @param a
+     * @param lo
+     * @param hi
+     * @param h
+     */
+    private void insertSort(int[] a, int lo, int hi, int h) {
+        for (int i = lo + h; i <= hi; i += h) {
+            insert(a, lo, i, h);
+        }
+    }
+
+    /**
+     * 将a[hi] 插入到a[lo],a[lo+h],a[lo+2h]..a[hi]中
+     *
+     * @param a
+     * @param lo
+     * @param hi
+     * @param h
+     */
+    private void insert(int[] a, int lo, int hi, int h) {
+        for (int i = hi; i > lo; i -= h) {
+            if (a[i] < a[i - 1]) {
+                swap(a, i, i - 1);
+            }
+        }
+    }
+
+    private void swap(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+
     }
 
     public static String toString(int[] a) {
