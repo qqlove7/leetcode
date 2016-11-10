@@ -54,10 +54,8 @@ public class ShellSort {
      * @param h
      */
     private void insert(int[] a, int lo, int hi, int h) {
-        for (int i = hi; i > lo; i -= h) {
-            if (a[i] < a[i - 1]) {
+        for (int i = hi; i > lo && a[i] < a[i - 1]; i -= h) {
                 swap(a, i, i - 1);
-            }
         }
     }
 

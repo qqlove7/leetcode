@@ -9,96 +9,61 @@ import org.junit.Test;
  */
 public class MergeSort {
 
-    public static int[] a = {3, 7, 5, 2, 10, 9, 4, 6};
-    public static int[] b = {1, 2, 5, 8, 9};
-    public static int[] c = {3, 7, 10};
+	public static int[] a = {3, 7, 5, 2, 10, 9, 4, 6};
+	public static int[] b = {1, 2, 5, 8, 9};
+	public static int[] c = {3, 7, 10};
 
-    @Test
-    public void testSort() {
-        System.out.println("  初始数组为:          " + toString(a));
-        printArry(MergeSort(a));
-    }
+	public void mergeSort(int a[], int lo, int hi, int[] temp) {
+		if (lo < hi) {
+			int mid = (lo + hi) / 2;
+			mergeSort(a, lo, mid, temp);
+			mergeSort(a, mid + 1, hi, temp);
+			merge(a, lo, mid, hi, temp);
+		}
+	}
 
-    public static String toString(int[] a) {
-        StringBuffer stringBuffer = new StringBuffer();
+	/**
+	 * 归并有序的 a[lo]..a[mid] 和a[mid+1]..a[hi]
+	 */
+	private void merge(int[] a, int lo, int mid, int hi, int[] temp) {
+		int i = lo; // 第一个有序数组长度
+		int j = mid + 1; // 第二个有序数组长度
+		for (int k = lo; k <= hi; k++) {
+			if (i <= mid && j <= hi) { // 两个数组都有剩余，比较第一元素取小放入 temp[k]
+				if (a[i] < a[j]) {
+					temp[k] = a[i];
+					i++;
+				} else {
+					temp[k] = a[j];
+					j++;
+				}
+			} else if (i <= mid && j > hi) { // 第一个数组有剩余
+				temp[k] = a[i];
+				i++;
+			} else if (i > mid && j <= hi) { // 第二个数组有剩余
+				temp[k] = a[j];
+				j++;
+			}
+		}
+		for (int k = lo; k <= hi; k++) {
+			a[k] = temp[k];
+		}
+	}
 
-        for (int i : a) {
-            stringBuffer.append(i);
-            stringBuffer.append(" , ");
-        }
-        return stringBuffer.toString();
-    }
+	@Test
+	public void testSort() {
+		printArry(a);
+		int[] temp = new int[a.length];
+		mergeSort(a, 0, a.length - 1, temp);
+		System.out.println();
+		printArry(a);
+	}
 
-    public void printArry(int[] a) {
-        for (int i : a) {
-            System.out.print(i + ",");
-        }
-    }
-
-    /**
-     * 首先考虑将两个有序队列合并
-     */
-    public static int[] memberArray(int[] b, int[] c) {
-        int i, j, k;
-        int m = b.length, n = c.length;
-        int[] d = new int[m + n];
-        i = j = k = 0;
-        while (i < m && j < n) {
-            if (b[i] < c[j]) {
-                d[k++] = b[i++];
-            } else {
-                d[k++] = c[j++];
-            }
-        }
-        while (i < m) {
-            d[k++] = b[i++];
-        }
-        while (j < n) {
-            d[k++] = c[j++];
-        }
-        return d;
-    }
-
-    /**
-     * 归并排序就是先将待排序队列分为A,B两组,再分别将组分解下去直到每个组中只有一个元素
-     * 这是可以认为每个组都是有序的,开始合并相邻有序队列
-     */
-    public int[] MergeSort(int[] a) {
-        int len = a.length;
-        int[] temp = new int[len];
-        mergeSort(a, 0, a.length - 1, temp);
-        return a;
-    }
-
-    public void mergeSort(int[] a, int first, int last, int[] temp) {
-        if (first < last) {
-            int mid = (first + last) / 2;
-            mergeSort(a, first, mid, temp);  //让左边有序
-            mergeSort(a, mid + 1, last, temp); //让右边有序
-            memberArray(a, first, mid, last, temp);
-        }
-
-    }
-
-    public void memberArray(int[] a, int first, int mid, int last, int[] temp) {
-        int i = first, j = mid + 1, k = 0;
-        while (i <= mid && j <= last) {
-            if (a[i] < a[j]) {
-                temp[k++] = a[i++];
-            } else {
-                temp[k++] = a[j++];
-            }
-        }
-        while (i <= mid) {
-            temp[k++] = a[i++];
-        }
-        while (j <= last) {
-            temp[k++] = a[j++];
-        }
-        for (i = 0; i < k; i++) {
-            a[first + i] = temp[i];
-        }
-    }
+	public void printArry(int[] a) {
+		for (int i : a) {
+			System.out.print(i + ",");
+		}
+	}
 
 
 }
