@@ -8,6 +8,13 @@ package com.sqq.graph;
  */
 public class IndexMinPQ<T extends Comparable<T>> {
 
+	public IndexMinPQ() {
+	}
+
+	public IndexMinPQ(int v) {
+
+	}
+
 	public void insert(int index, T value) {
 
 	}
