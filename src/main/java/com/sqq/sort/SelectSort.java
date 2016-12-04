@@ -10,73 +10,39 @@ public class SelectSort {
 	public static int[] a = {3, 7, 5, 2, 10, 9, 4, 6};
 
 
-	public void chooseSort(int[] a) {
-		for (int i = 0; i < a.length; i++) {
-			int minIndex = i;
-			for (int j = i; j < a.length; j++) {
-				if (a[j] < a[minIndex]) {
-					minIndex = j;
-				}
+	/**
+	 * 选择排序：每一次从后面的选出最小数，放到前面
+	 *
+	 * @param a
+	 * @param lo
+	 * @param hi
+	 */
+	public void sort(int[] a, int lo, int hi) {
+		for (int i = lo; i < hi; i++) {
+			for (int j = hi; j > i; j--) {
+				if (a[j] < a[j - 1]) swap(a, j, j - 1);
 			}
-			int temp = a[minIndex];
-			a[minIndex] = a[i];
-			a[i] = temp;
 		}
 	}
 
-	/**
-	 * 选择排序
-	 *
-	 * @param a
-	 * @return
-	 */
-	public static int[] selectSort(int[] a) {
-		int temp;
-		int time = 1;
-		int len = a.length;
-		//第一层循环,循环次数为数组长度
-		for (int i = 0; i < len; i++) {
-			//每一次内循环都会拿a[j]..a[len-1]中数组和a[i]/即第一个数字比较,若比之小则交换
-			//循环结束后将将最小的数字放到最前
-			for (int j = i; j < len; j++) {
-				if (a[i] > a[j]) {
-				    /*temp = a[i];
-			        a[i] = a[j];
-                    a[j] = temp;*/
-					a[i] ^= a[j];
-					a[j] ^= a[i];
-					a[i] ^= a[j];
-				}
-			}
-			System.out.println("第" + (time++) + "次外循环,数组此时为:" + toString(a));
-		}
-		return a;
+	private void swap(int[] a, int i, int j) {
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
 	}
 
 	@Test
 	public void testSort() {
-		selectSort(a);
-	}
+		printArry(a);
+		sort(a, 0, a.length - 1);
+		printArry(a);
 
-	public static String toString(int[] a) {
-		StringBuffer stringBuffer = new StringBuffer();
-
-		for (int i : a) {
-			stringBuffer.append(i);
-			stringBuffer.append(" , ");
-		}
-		return stringBuffer.toString();
 	}
 
 	public void printArry(int[] a) {
 		for (int i : a) {
 			System.out.print(i + ",");
 		}
-	}
-
-	public static void main(String[] args) {
-		SelectSort selectSort = new SelectSort();
-		selectSort.chooseSort(a);
-		selectSort.printArry(a);
+		System.out.println();
 	}
 }

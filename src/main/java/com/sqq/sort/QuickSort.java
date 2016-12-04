@@ -24,24 +24,20 @@ public class QuickSort {
 	}
 
 	private int partition(int[] a, int low, int hi) {
-		int x = a[low];
+		int v = a[low];
 		while (low < hi) {
-			while (a[hi] > x && low < hi) {
-				hi--;
-			}
+			while (low < hi && a[hi] > v) hi--;
 			a[low] = a[hi];
-			while (a[low] < x && low < hi) {
-				low++;
-			}
+			while (low < hi && a[low] < v) low++;
 			a[hi] = a[low];
 		}
-		a[low] = x;
+		a[low] = v;
 		return low;
 	}
 
-
 	@Test
 	public void testSort() {
+		printArry(a);
 		quickSort(a, 0, a.length - 1);
 		printArry(a);
 	}
@@ -51,6 +47,7 @@ public class QuickSort {
 		for (int i : a) {
 			System.out.print(i + ",");
 		}
+		System.out.println();
 	}
 
 

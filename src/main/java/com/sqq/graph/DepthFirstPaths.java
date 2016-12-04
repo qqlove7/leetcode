@@ -3,7 +3,7 @@ package com.sqq.graph;
 import java.util.Stack;
 
 /**
- * desc
+ * 有向图的深度优先遍历
  *
  * @Author: qianqian.sun
  * @Date: 2016/11/21
