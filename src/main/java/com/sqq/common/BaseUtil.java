@@ -1,4 +1,4 @@
-package com.test.sort;
+package com.sqq.common;
 
 /**
  * @Author: sunqianqian

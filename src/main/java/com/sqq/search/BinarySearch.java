@@ -1,6 +1,6 @@
 package com.sqq.search;
 
-import com.test.sort.BaseUtil;
+import com.sqq.common.BaseUtil;
 
 import java.util.Arrays;
 
