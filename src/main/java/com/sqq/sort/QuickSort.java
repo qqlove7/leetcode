@@ -24,14 +24,14 @@ public class QuickSort {
 	}
 
 	private int partition(int[] a, int low, int hi) {
-		int v = a[low];
+		int v = a[low]; // 基准数 挖出一个坑
 		while (low < hi) {
-			while (low < hi && a[hi] > v) hi--;
-			a[low] = a[hi];
-			while (low < hi && a[low] < v) low++;
-			a[hi] = a[low];
+			while (low < hi && a[hi] > v) hi--; // 从右边开始找到比它小的一个数(跳过大的) 挖出来
+			a[low] = a[hi];        // 填到左边的坑里
+			while (low < hi && a[low] < v) low++; // 从左边开始找到比它大的一个数(跳过小的) 挖出来
+			a[hi] = a[low];        // 填到右边的坑里
 		}
-		a[low] = v;
+		a[low] = v; // 最后将基准数填回去
 		return low;
 	}
 
