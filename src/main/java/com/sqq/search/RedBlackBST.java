@@ -1,8 +1,10 @@
 package com.sqq.search;
 
 /**
- * desc
- *
+ * 标准动态平衡二叉查找树
+ * 1. 红链接均为左链接
+ * 2. 没有任何一个节点同时和两条红链接相连
+ * 3. 完美黑色平衡，任意空链接到根节点的路径上的黑链接数量相同
  * @Author: qianqian.sun
  * @Date: 2016/11/15
  */
@@ -70,21 +72,32 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 		h.right.color = BLACK;
 	}
 
-	public void put(Key key, Value value) {
-		root = put(root, key, value);
-		root.color = BLACK;
-	}
+    // 节点放置或新增
+    public void put(Key key, Value value) {
+        root = put(root, key, value);
+        // 根节点为黑色
+        root.color = BLACK;
+    }
 
 	private Node put(Node h, Key key, Value value) {
+        // 节点不存在则新建，与父节点链接为红色
 		if (h == null) return new Node(key, value, 1, RED);
 
 		int cmp = key.compareTo(h.key);
+        // 新节点key小于该节点，向左节点递归新增操作
 		if (cmp < 0) h.left = put(h.left, key, value);
+            // 若新节点key大于该节点，向右节点递归新增操作
 		else if (cmp > 0) h.right = put(h.right, key, value);
+            // 若新节点key等于该节点 则更新value
 		else h.value = value;
 
-		if (isRed(h.right) && !isRed(h.left)) h = rotateLeft(h);
-		if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+        // 下面进行红黑链接的修正
+
+        // 若该节点右链接为红色 且 左链接不为红色，进行左旋转
+        if (isRed(h.right) && !isRed(h.left)) h = rotateLeft(h);
+        // 若该节点左链接为红色且左节点的左链接也为红色，进行右旋转
+        if (isRed(h.left) && isRed(h.left.left)) h = rotateRight(h);
+        // 若左右链接都为红色，进行颜色反转
 		if (isRed(h.left) && isRed(h.right)) flipColors(h);
 
 		h.N = size(h.left) + size(h.right) + 1;

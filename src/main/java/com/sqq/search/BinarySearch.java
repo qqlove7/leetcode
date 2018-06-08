@@ -2,44 +2,24 @@ package com.sqq.search;
 
 import com.sqq.common.BaseUtil;
 
-import java.util.Arrays;
-
 /**
  * @Author: sunqianqian
  * @Date: 2015/11/20
- * @Description:
- * @CodeReviewer:
+ * 二分查找：在有序数组中找到一个元素的索引
+ * 与区间中间数值比较，小则与左侧区间递归，大则在右侧区间递归
  */
 public class BinarySearch extends BaseUtil {
     static int[] a = {1, 2, 5, 6, 15, 46, 58, 99};
 
     public static void main(String[] args) {
         printArray(a);
-        int key_index = binarySearch(a, 5);
+        int key_index = binarySearch(a, 46);
         System.out.println(key_index);
-        System.out.println(binarySearch2(a, 5));
-        System.out.println(Arrays.binarySearch(a, 5));
     }
 
     public static int binarySearch(int[] a, int key) {
-        int low = 0;
-        int high = a.length - 1;
-        int mid;
-        while (low <= high) {
-            mid = low + (high - low) / 2;
-            if (key < a[mid]) {
-                high = mid - 1;
-            } else if (key > a[mid]) {
-                low = mid + 1;
-            } else {
-                return mid;
-            }
-        }
-        return -1;
-    }
-
-    public static int binarySearch2(int[] a, int key) {
-        return rank(a, key, 0, a.length - 1);
+        int lo = 0, hi = a.length - 1;
+        return rank(a, key, lo, hi);
     }
 
     public static int rank(int[] a, int key, int lo, int hi) {
@@ -54,5 +34,6 @@ public class BinarySearch extends BaseUtil {
         } else {
             return mid;
         }
+
     }
 }
