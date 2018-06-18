@@ -50,16 +50,22 @@ public class RedBlackBST<Key extends Comparable<Key>, Value> {
 		return x;
 	}
 
-	Node rotateRight(Node h) {
-		Node x = h.left;
-		h.left = x.right;
-		x.right = h;
-		x.color = h.color;
-		h.color = RED;
-		x.N = h.N;
-		h.N = 1 + size(h.left) + size(h.right);
-		return x;
-	}
+    /**
+     * 右旋转
+     *
+     * @param h 红色左链接指向节点的左链接为红色
+     * @return x 返回的节点左右链接都为红色
+     */
+    Node rotateRight(Node h) {
+        Node x = h.left;
+        h.left = x.right;
+        x.right = h;
+        x.color = h.color;
+        h.color = RED;
+        x.N = h.N;
+        h.N = 1 + size(h.left) + size(h.right);
+        return x;
+    }
 
 	private int size(Node x) {
 		if (x == null) return 0;

@@ -41,10 +41,10 @@ public class DirectedDFS {
 		for (int i = 1; i < args.length; i++) {
 			sources.add(Integer.parseInt(args[i]));
 		}
-		DirectedDFS rechable = new DirectedDFS(G, sources);
+        DirectedDFS reachable = new DirectedDFS(G, sources);
 
 		for (int v = 0; v < G.V(); v++) {
-			if (rechable.marked(v)) System.out.println(v);
+            if (reachable.marked(v)) System.out.println(v);
 		}
 	}
 

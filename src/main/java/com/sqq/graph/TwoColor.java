@@ -1,7 +1,8 @@
 package com.sqq.graph;
 
 /**
- * desc
+ * 判断一个图是否二分图
+ * 双色问题
  *
  * @Author: qianqian.sun
  * @Date: 2016/11/21

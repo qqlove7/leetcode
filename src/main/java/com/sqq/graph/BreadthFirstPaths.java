@@ -1,11 +1,9 @@
 package com.sqq.graph;
 
 import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
 
 /**
- * desc
+ * 使用广度优先遍历查找最短路径
  *
  * @Author: qianqian.sun
  * @Date: 2016/11/21
@@ -26,11 +24,11 @@ public class BreadthFirstPaths {
 	}
 
 	private void bfs(Graph G, int s) {
-		Queue<Integer> queue = new LinkedList<Integer>();
+        LinkedList<Integer> queue = new LinkedList<>();
 		marked[s] = true; // 标记起点
 		queue.add(s); // 将它加入队列
 		while (!queue.isEmpty()) {
-			int v = queue.peek();   // 从队列中删去下一顶点
+            int v = queue.pop();   // 从队列中删去下一顶点
 			for (int w : G.adj(v)) {
 				if (!marked[w]) { // 对于每个未被标记的相邻顶点
 					edgeTo[w] = v; // 保存最短路径的最后一条边
@@ -53,12 +51,24 @@ public class BreadthFirstPaths {
 	 */
 	public Iterable<Integer> pathTo(int v) {
 		if (!hasPathTo(v)) return null;
-		Stack<Integer> path = new Stack<Integer>();
+        LinkedList<Integer> path = new LinkedList<Integer>();
 		for (int x = v; x != s; x = edgeTo[x]) {
 			path.push(x);
 		}
 		path.push(s);
 		return path;
 	}
+
+    public static void main(String[] args) {
+        Graph graph = new Graph(5);
+        graph.addEdge(0, 1);
+        graph.addEdge(0, 2);
+        graph.addEdge(1, 3);
+        graph.addEdge(1, 4);
+        System.out.println(graph);
+
+        BreadthFirstPaths bfp = new BreadthFirstPaths(graph, 0);
+        System.out.println(bfp.pathTo(4));
+    }
 
 }

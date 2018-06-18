@@ -1,7 +1,7 @@
 package com.sqq.graph;
 
 /**
- * desc
+ * 无向图的相关处理
  *
  * @Author: qianqian.sun
  * @Date: 2016/11/17

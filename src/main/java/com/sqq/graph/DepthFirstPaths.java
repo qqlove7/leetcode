@@ -3,7 +3,7 @@ package com.sqq.graph;
 import java.util.Stack;
 
 /**
- * 有向图的深度优先遍历
+ * 使用深度优先搜索查找图中路径
  *
  * @Author: qianqian.sun
  * @Date: 2016/11/21
@@ -39,7 +39,7 @@ public class DepthFirstPaths {
 	/**
 	 * 起点到v之间是否有路径
 	 *
-	 * @param v
+     * @param v 顶点
 	 */
 	public boolean hasPathTo(int v) {
 		return marked[v];
@@ -48,12 +48,12 @@ public class DepthFirstPaths {
 	/**
 	 * 起点到v之间的路径
 	 *
-	 * @param v
-	 * @return
+     * @param v 顶点
+     * @return 路径顶点列表
 	 */
 	public Iterable<Integer> pathTo(int v) {
 		if (!hasPathTo(v)) return null;
-		Stack<Integer> path = new Stack<Integer>();
+        Stack<Integer> path = new Stack<>();
 		for (int x = v; x != s; x = edgeTo[x]) {
 			path.push(x);
 		}
