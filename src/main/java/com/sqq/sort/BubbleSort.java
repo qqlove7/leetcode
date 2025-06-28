@@ -1,5 +1,6 @@
 package com.sqq.sort;
 
+import com.sqq.common.BaseUtil;
 import org.junit.Test;
 
 /**
@@ -42,10 +43,7 @@ public class BubbleSort {
     }
 
     public void printArray(int[] a) {
-        for (int i : a) {
-            System.out.print(i + ",");
-        }
-        System.out.println();
+        BaseUtil.printArray(a);
     }
 
 }
