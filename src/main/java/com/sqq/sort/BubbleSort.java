@@ -35,13 +35,13 @@ public class BubbleSort {
 
     @Test
     public void testSort() {
-        printArry(a);
+        printArray(a);
         sort(a, 0, a.length - 1);
-        printArry(a);
+        printArray(a);
 
     }
 
-    public void printArry(int[] a) {
+    public void printArray(int[] a) {
         for (int i : a) {
             System.out.print(i + ",");
         }
